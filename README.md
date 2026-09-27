@@ -10,7 +10,9 @@ This is a 2009, learning-free method, so the goal isn't to beat the state of
 the art. The goal was to implement a paper properly, measure what it actually
 does, and be upfront about where it breaks.
 
-![pipeline](docs/figures/pipeline.jpg)
+<p align="center">
+  <img src="docs/figures/pipeline.jpg" alt="pipeline" width="600">
+</p>
 
 ## Method
 
@@ -27,8 +29,8 @@ transmission `t = exp(-β d)`. With one image, `J`, `t` and `A` are all unknown.
 | Recovery | `J = (I − A) / max(t, t0) + A`, t0 = 0.1 | `dcp/recover.py` |
 | Relative depth | `−ln t` = β·d, known up to the unknown β | `dcp/recover.py` |
 
-The guided filter isn't in the 2009 paper — He et al. added it a year later
-(ECCV 2010) — but it's the fast alternative I benchmark against soft matting
+The guided filter isn't in the 2009 paper, He et al. added it a year later
+(ECCV 2010), but it's the fast alternative I benchmark against soft matting
 throughout this README.
 
 ## Results
@@ -64,13 +66,14 @@ Paired differences on the same scenes (`objects`): soft matting − raw =
 **+0.37 ± 0.20 dB, better on 20/20 scenes**; guided filter − raw =
 −0.09 ± 0.86 dB, better on 10/20.
 
-![synthetic](docs/figures/synthetic_transmission.jpg)
-
+<p align="center">
+  <img src="docs/figures/synthetic_transmission.jpg" alt="pipeline" width="600">
+</p>
 A few things come out of this. The estimation behaves the way the model
 predicts: `A` lands within about 5 grey levels of the true value, and `t~`
 within ~0.02, whenever the prior actually holds (also checked in
-`tests/test_synthetic_haze.py`). The raw `t~` is biased near depth edges —
-near objects "grow" by roughly a patch radius — which is exactly what
+`tests/test_synthetic_haze.py`). The raw `t~` is biased near depth edges,
+near objects "grow" by roughly a patch radius, which is exactly what
 refinement is supposed to fix, and soft matting does reduce that error, just
 not by much. Both refinements also copy image texture into `t`, visible in
 the figure above; the guided filter suffers more here because its guide is
@@ -98,7 +101,7 @@ soft matting − input = +0.94 ± 5.61 dB (better on 17/30), +0.037 ± 0.095 SSI
 soft matting − guided = −0.03 ± 0.19 dB (better on 17/30), −0.005 ± 0.006 SSIM (better on 5/30).
 
 On this sample both methods beat the untouched input on average, but not
-reliably — PSNR only improves on about half the images, and the spread
+reliably, PSNR only improves on about half the images, and the spread
 (±5.6 dB) is much bigger than the average gain (~1 dB). So on a chunk of
 images the DCP is making things worse, probably the same bright-surface and
 sky cases shown further down. SSIM is more consistent (19/30). Guided filter
@@ -110,7 +113,7 @@ the one to default to.
 
 Median of 5 runs after one warm-up, `examples/forbidden_city_smog.jpg` (600×546).
 Environment: Intel Core i5-6300U @ 2.40GHz (laptop), Python 3.11.0, NumPy 2.4.4,
-SciPy 1.17.1, OpenCV 4.13.0 — raw data in `results/timing/`.
+SciPy 1.17.1, OpenCV 4.13.0, raw data in `results/timing/`.
 Reproduce with `python scripts/benchmark_timing.py examples/forbidden_city_smog.jpg --size-sweep`.
 
 | Stage | Guided filter | Soft matting |
@@ -127,7 +130,7 @@ Refinement time vs image size (same image, downscaled):
 | Soft matting | 3.69 s | 11.12 s | 32.97 s | 38.21 s |
 
 At full size, soft matting is about 1150× slower than the guided filter, and
-88 % of that time is the conjugate-gradient solve — λ = 1e-4 makes the system
+88 % of that time is the conjugate-gradient solve, λ = 1e-4 makes the system
 badly conditioned. Memory is the other limit: building the Laplacian needs
 ~22 M COO entries (~350 MB) at 600×546, so anything bigger gets solved on a
 downscaled copy instead (`--sm-max-side`). That downscaling is logged and
@@ -147,7 +150,7 @@ since it's the more careful measurement.
 Both scenes have real depth structure and roughly neutral lighting, the case
 the model handles best. The ridge line is the clearest win: the blue haze
 lifts and the distant ridges show up. The misty forest is a smaller, more
-honest win — there's less haze to begin with, so most of the change is added
+honest win, there's less haze to begin with, so most of the change is added
 contrast rather than anything dramatic.
 
 I left dense urban smog out of this figure on purpose. On
@@ -165,7 +168,7 @@ Example images come from Wikimedia Commons (authors and licences in
 any haze, so the prior reads them as dense haze: they get assigned a low
 transmission (treated as far away), and the recovery over-corrects them,
 amplifying noise where `t` is small. In the figure, the frosted branches and
-hazy sky come out with a visible purple/green cast and grain — worse than the
+hazy sky come out with a visible purple/green cast and grain, worse than the
 mild haze already in the input.
 
 ![snow](docs/figures/failure_snow_fog.jpg)
@@ -173,7 +176,7 @@ mild haze already in the input.
 **Coloured, non-uniform illumination (sunset).** The model assumes one
 global, uniform `A`. A saturated blue sky has a low dark channel, so it's
 read as *near* and haze-free, while the bright band around the sun is read
-as dense haze — you can see it in the output: the blue sky turns much more
+as dense haze, you can see it in the output: the blue sky turns much more
 saturated, almost inky, while the warm halo around the sun darkens instead
 of clearing, the opposite of what dehazing is supposed to do there.
 
