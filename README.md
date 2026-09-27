@@ -10,7 +10,7 @@ This is a 2009, learning-free method, so the goal isn't to beat the state of
 the art. The goal was to implement a paper properly, measure what it actually
 does, and be upfront about where it breaks.
 
-![pipeline](docs/figures/pipeline.jpg)
+<img src="docs/figures/pipeline.jpg" alt="pipeline" width="500">
 
 ## Method
 
