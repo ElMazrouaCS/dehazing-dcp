@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+authors = [{ name = "Ahmed El Mazroua" }]
+license = { text = "MIT" }
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dcp-dehazing"
+version = "1.0.0"
+description = "Reproduction of Single Image Haze Removal Using Dark Channel Prior (He et al., CVPR 2009)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "opencv-python-headless>=4.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "scikit-image>=0.22"]
+
+[project.scripts]
+dcp = "dcp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+# Single-letter names (I, A, J, L) follow the paper's notation on purpose
+ignore = ["E741", "N802", "N803", "N806"]
+
+[project.urls]
+Repository = "https://github.com/ElMazrouaCS/dehazing-dcp"

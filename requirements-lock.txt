@@ -1,0 +1,9 @@
+# Exact versions used to produce the results in this repository (Python 3.12).
+# Install with:  pip install -r requirements-lock.txt && pip install -e . --no-deps
+numpy==2.4.4
+scipy==1.17.1
+opencv-python-headless==4.13.0.92
+# dev
+pytest==9.1.1
+ruff==0.16.8
+scikit-image==0.26.0

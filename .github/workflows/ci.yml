@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: tests (py${{ matrix.python }}, ${{ matrix.deps }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "3.12"
+            deps: locked     # exact versions used for the published results
+          - python: "3.10"
+            deps: latest     # oldest supported Python, newest compatible libs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install (locked)
+        if: matrix.deps == 'locked'
+        run: |
+          pip install -r requirements-lock.txt
+          pip install -e . --no-deps
+      - name: Install (latest)
+        if: matrix.deps == 'latest'
+        run: pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Unit tests
+        run: pytest
+      - name: Smoke test of the CLI and the experiment scripts
+        run: |
+          dcp run examples/forbidden_city_smog.jpg --out /tmp/out --save-all
+          python scripts/synthetic_experiment.py --seeds 2 --out /tmp/synthetic

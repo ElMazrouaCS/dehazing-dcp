@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+
+# Datasets are downloaded but not committed (see data/README.md)
+data/*
+!data/README.md
+
+# scratch outputs of the CLI
+out/
+results/scratch/

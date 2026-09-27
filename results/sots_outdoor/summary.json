@@ -1,0 +1,101 @@
+{
+  "hazy_dir": "data\\sots_outdoor\\hazy",
+  "gt_dir": "data\\sots_outdoor\\gt",
+  "n_available": 500,
+  "n_evaluated": 30,
+  "subset": {
+    "limit": 30,
+    "seed": 0
+  },
+  "max_side": null,
+  "gt_center_cropped": 0,
+  "refinement_effective": {
+    "guided->guided": 30,
+    "soft_matting->soft_matting": 30
+  },
+  "summary": {
+    "identity": {
+      "psnr": {
+        "mean": 16.151611786591975,
+        "std": 2.7688902674915385,
+        "n": 30
+      },
+      "ssim": {
+        "mean": 0.8304622283353194,
+        "std": 0.071288708826011,
+        "n": 30
+      }
+    },
+    "guided": {
+      "psnr": {
+        "mean": 17.118236544849495,
+        "std": 4.16375498639224,
+        "n": 30
+      },
+      "ssim": {
+        "mean": 0.8722028821454302,
+        "std": 0.05025305987884429,
+        "n": 30
+      }
+    },
+    "soft_matting": {
+      "psnr": {
+        "mean": 17.092035201361615,
+        "std": 4.113796422992271,
+        "n": 30
+      },
+      "ssim": {
+        "mean": 0.8675673469808508,
+        "std": 0.049863085621309644,
+        "n": 30
+      }
+    }
+  },
+  "paired": {
+    "guided - identity (psnr)": {
+      "mean": 0.9666247582575238,
+      "std": 5.642065143332912,
+      "n": 30,
+      "wins": 16
+    },
+    "guided - identity (ssim)": {
+      "mean": 0.04174065381011084,
+      "std": 0.0974435210675299,
+      "n": 30,
+      "wins": 19
+    },
+    "soft_matting - identity (psnr)": {
+      "mean": 0.9404234147696404,
+      "std": 5.606868774740256,
+      "n": 30,
+      "wins": 17
+    },
+    "soft_matting - identity (ssim)": {
+      "mean": 0.037105118645531454,
+      "std": 0.09469573044576943,
+      "n": 30,
+      "wins": 19
+    },
+    "soft_matting - guided (psnr)": {
+      "mean": -0.026201343487883357,
+      "std": 0.1939717811958308,
+      "n": 30,
+      "wins": 17
+    },
+    "soft_matting - guided (ssim)": {
+      "mean": -0.004635535164579392,
+      "std": 0.006179252197422542,
+      "n": 30,
+      "wins": 5
+    }
+  },
+  "env": {
+    "cpu": "Intel Core i5-6300U @ 2.40GHz",
+    "logical_cores": 4,
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.0",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1",
+    "opencv": "4.13.0"
+  }
+}

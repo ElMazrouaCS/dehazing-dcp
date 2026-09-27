@@ -1,0 +1,27 @@
+[
+  {
+    "file": "forbidden_city_smog.jpg",
+    "title": "File:Beijing Forbidden City Smog.jpg",
+    "role": "pipeline figure, timing benchmark"
+  },
+  {
+    "file": "snow_fog.jpg",
+    "title": "File:Winter fog is coming (31246745274).jpg",
+    "role": "failure case: bright surfaces (snow)"
+  },
+  {
+    "file": "sunset_sky.jpg",
+    "title": "File:Crepuscular rays color.jpg",
+    "role": "failure case: coloured, non-uniform illumination"
+  },
+  {
+    "file": "aerial_perspective_hills.jpg",
+    "title": "File:Aerial perspective 1.JPG",
+    "role": "qualitative example: classic atmospheric perspective (haze increasing with distance)"
+  },
+  {
+    "file": "morning_mist_forest.jpg",
+    "title": "File:Gum trees in the early Morning mist at Sheepyard flat (6127021798).jpg",
+    "role": "qualitative example: forest with light mist and clear depth layers"
+  }
+]
