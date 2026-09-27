@@ -10,7 +10,9 @@ This is a 2009, learning-free method, so the goal isn't to beat the state of
 the art. The goal was to implement a paper properly, measure what it actually
 does, and be upfront about where it breaks.
 
-<img src="docs/figures/pipeline.jpg" alt="pipeline" width="500">
+<p align="center">
+  <img src="docs/figures/pipeline.jpg" alt="pipeline" width="600">
+</p>
 
 ## Method
 
@@ -64,8 +66,9 @@ Paired differences on the same scenes (`objects`): soft matting − raw =
 **+0.37 ± 0.20 dB, better on 20/20 scenes**; guided filter − raw =
 −0.09 ± 0.86 dB, better on 10/20.
 
-![synthetic](docs/figures/synthetic_transmission.jpg)
-
+<p align="center">
+  <img src="docs/figures/synthetic_transmission.jpg" alt="pipeline" width="600">
+</p>
 A few things come out of this. The estimation behaves the way the model
 predicts: `A` lands within about 5 grey levels of the true value, and `t~`
 within ~0.02, whenever the prior actually holds (also checked in
