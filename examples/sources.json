@@ -2,7 +2,7 @@
   {
     "file": "forbidden_city_smog.jpg",
     "title": "File:Beijing Forbidden City Smog.jpg",
-    "role": "pipeline figure, timing benchmark"
+    "role": "speed benchmark (a hard, dense-haze case, not shown as an \"it works\" example)"
   },
   {
     "file": "snow_fog.jpg",
@@ -15,13 +15,28 @@
     "role": "failure case: coloured, non-uniform illumination"
   },
   {
-    "file": "aerial_perspective_hills.jpg",
-    "title": "File:Aerial perspective 1.JPG",
-    "role": "qualitative example: classic atmospheric perspective (haze increasing with distance)"
+      "file": "temple.jpg",
+      "title": "Tiananmen (input haze image, He, Sun & Tang, CVPR 2009 project page)",
+      "role": "qualitative example: the paper's own featured teaser image",
+      "source_url": "https://people.csail.mit.edu/kaiming/cvpr09/tiananmen/tiananmen1.png",
+      "note": "The primary demo image on the paper's own project homepage, shown there as 'input haze image' alongside the authors' own result. Hosted by Kaiming He, one of the paper's authors."
   },
   {
     "file": "morning_mist_forest.jpg",
     "title": "File:Gum trees in the early Morning mist at Sheepyard flat (6127021798).jpg",
     "role": "qualitative example: forest with light mist and clear depth layers"
+  },
+  {
+    "file": "toys.jpg",
+    "title": "Toys",
+    "role": "pipeline figure: the paper's own demo image",
+    "source_url": "https://people.csail.mit.edu/kaiming/cvpr09/toys/toys.jpg",
+    "note": "Hosted on the CVPR 2009 project page of Kaiming He, one of the paper's authors, and used there as a benchmark input image. No explicit licence is stated on the page; used here for research/educational reproduction of the paper it comes from."
+  },
+  {
+    "file": "ville.jpg",
+    "title": "unknown (street with shop signage, likely Kathmandu, Nepal)",
+    "role": "qualitative example: dense repeated signage, many small colour patches",
+    "note": "ORIGIN AND LICENCE NOT VERIFIED. Not found on He et al.'s or Fattal's project pages (the two sources checked). May be subject to copyright. Kept at the repository author's own discretion pending a reverse-image search."
   }
 ]

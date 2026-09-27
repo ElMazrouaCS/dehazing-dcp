@@ -88,6 +88,19 @@ def main() -> int:
     rows, failed = [], 0
     for e in entries:
         target = EXAMPLES / e["file"]
+        if not e["title"].startswith("File:"):
+            # Not a Commons file: nothing to fetch, just check it's there
+            # and cite it manually from the JSON's own fields.
+            if not target.exists():
+                print(f"FAIL {e['file']:<26} missing local file, and not a Commons "
+                      f"title so it can't be auto-downloaded", file=sys.stderr)
+                failed += 1
+                continue
+            h, w = cv2.imread(str(target)).shape[:2]
+            print(f"ok   {e['file']:<26} {w}x{h}  (manual entry, not from Commons)")
+            rows.append((e, {"author": "unknown", "licence": e.get("note", "unverified"),
+                              "licence_url": "", "page_url": e.get("source_url", "")}, w, h))
+            continue
         try:
             info = image_info(e["title"])
             if not info["licence"].startswith(ALLOWED_LICENCE_PREFIXES):

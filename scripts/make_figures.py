@@ -43,17 +43,13 @@ def main() -> None:
     logging.basicConfig(level=logging.WARNING)
 
     # full pipeline on one image.
-    main_img = load("forbidden_city_smog.jpg")
+    main_img = load("toys.jpg")
     save(out / "pipeline.jpg", pipeline_mosaic(main_img, dehaze(main_img)))
 
     # Before / after on the example images (guided filter, paper defaults).
     panels, titles = [], []
-    # Dense urban smog (forbidden_city_smog.jpg) stays out of this figure: it
-    # is a poor "it works" demo (noise, colour cast) even though it is fine
-    # for the technical pipeline figure above. These two have real depth
-    # structure and a roughly neutral atmospheric light, which is the case
-    # the paper's model fits best.
-    demo_names = ["aerial_perspective_hills.jpg", "morning_mist_forest.jpg"]
+
+    demo_names = ["ville.jpg", "temple.jpg"]
     for name in demo_names:
         img = load(name)
         panels += [img, dehaze(img).J]
