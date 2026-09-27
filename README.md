@@ -147,17 +147,18 @@ since it's the more careful measurement.
 
 ![before after](docs/figures/before_after.jpg)
 
-Both scenes have real depth structure and roughly neutral lighting, the case
-the model handles best. The ridge line is the clearest win: the blue haze
-lifts and the distant ridges show up. The misty forest is a smaller, more
-honest win, there's less haze to begin with, so most of the change is added
-contrast rather than anything dramatic.
+The first scene is Tiananmen Gate under dense haze, and it isn't a random
+pick, it's the paper's own featured demo image, hosted on the authors'
+project page as their main input example. The second is a street front with
+dense signage, origin unverified (see the note in `examples/SOURCES.md`),
+kept because the many small colour patches make it a good case for the
+prior.
 
-I left dense urban smog out of this figure on purpose. On
-`forbidden_city_smog.jpg` (the one used for the pipeline figure above), the
-same default settings just darken the image and add noise, with no real gain
-in clarity. It's still useful for the pipeline figure, since that one only
-needs to show the six stages, not look good.
+Dense urban smog is otherwise a hard case for this method: on
+`examples/forbidden_city_smog.jpg` (used for the speed benchmark below), the
+same default parameters darken the image and add noise without a clear gain
+in clarity. That one is kept only for timing, since speed doesn't care what
+the output looks like.
 
 Example images come from Wikimedia Commons (authors and licences in
 [`examples/SOURCES.md`](examples/SOURCES.md)).
@@ -202,7 +203,7 @@ pytest                                               # 32 tests, < 2 s
 dcp run examples/forbidden_city_smog.jpg --out results/run --save-all
 dcp run examples/forbidden_city_smog.jpg --method soft_matting --out results/run_sm
 dcp compare examples/morning_mist_forest.jpg --out results/compare
-dcp sweep examples/aerial_perspective_hills.jpg --param omega --values 0.75 0.85 0.95 1.0 --out results/sweep
+dcp sweep examples/temple.jpg --param omega --values 0.75 0.85 0.95 1.0 --out results/sweep
 dcp run --help                                        # every parameter is exposed
 ```
 
