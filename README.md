@@ -1,5 +1,7 @@
 # Dark Channel Prior dehazing: a tested reproduction
 
+[![CI](https://github.com/ElMazrouaCS/dehazing-dcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ElMazrouaCS/dehazing-dcp/actions/workflows/ci.yml)
+
 Reproduction of **"Single Image Haze Removal Using Dark Channel Prior"**
 (K. He, J. Sun, X. Tang, CVPR 2009), with both transmission refinements
 (the paper's **soft matting** and the faster **guided filter**), a controlled
