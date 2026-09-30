@@ -4,7 +4,7 @@
     dcp compare IMAGE [options]    guided filter vs soft matting on one image
     dcp sweep IMAGE --param omega --values 0.75 0.85 0.95 1.0
 
-Every parameter of the pipeline is exposed; the resolved parameters and what
+Every parameter of the pipeline is exposed, the resolved parameters and what
 actually happened (downscaling, solver convergence, timings) are written to a
 JSON file next to the outputs.
 """
@@ -33,6 +33,10 @@ SWEEPABLE = {"patch_size": int, "omega": float, "t0": float,
 
 
 def load_image(path: str | Path) -> np.ndarray:
+    # Resolve first: turns a relative or ../-containing path into an
+    # absolute one, so what's actually opened is explicit (in logs, in the
+    # error message below) rather than left to the current working directory.
+    path = Path(path).resolve()
     img = cv2.imread(str(path), cv2.IMREAD_COLOR)
     if img is None:
         raise FileNotFoundError(f"cannot read image: {path}")
@@ -75,13 +79,11 @@ def metrics_with_baseline(image, outputs: dict[str, np.ndarray], gt_path) -> dic
     return rows
 
 
-# --------------------------------------------------------------------------
 # sub-commands
-# --------------------------------------------------------------------------
 
 def cmd_run(args) -> None:
     image = load_image(args.image)
-    out = Path(args.out)
+    out = Path(args.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     stem = Path(args.image).stem
 
@@ -107,7 +109,7 @@ def cmd_run(args) -> None:
 
 def cmd_compare(args) -> None:
     image = load_image(args.image)
-    out = Path(args.out)
+    out = Path(args.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     stem = Path(args.image).stem
 
@@ -140,7 +142,7 @@ def cmd_compare(args) -> None:
 
 def cmd_sweep(args) -> None:
     image = load_image(args.image)
-    out = Path(args.out)
+    out = Path(args.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     stem = Path(args.image).stem
     cast = SWEEPABLE[args.param]
@@ -156,10 +158,7 @@ def cmd_sweep(args) -> None:
         titles.append(f"{args.param}={value}")
     write(out / f"{stem}_sweep_{args.param}.png", mosaic(panels, titles))
 
-
-# --------------------------------------------------------------------------
 # parser
-# --------------------------------------------------------------------------
 
 def add_pipeline_args(p: argparse.ArgumentParser) -> None:
     d = DehazeParams()
